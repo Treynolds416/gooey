@@ -124,13 +124,13 @@ function M.input(node_id, keyboard_type, action_id, action, config, refresh_fn)
 		if input.released_now then
 			input.selected = true
 			input.marked_text = ""
-			gui.reset_keyboard()
-			gui.show_keyboard(keyboard_type, true)
+			--gui.reset_keyboard()
+			--gui.show_keyboard(keyboard_type, true)
 		elseif input.selected and action.pressed and action_id == actions.TOUCH and not input.over then
 			input.selected = false
 			input.text = input.text .. (not use_marked_text and input.marked_text or "")
 			input.marked_text = ""
-			gui.hide_keyboard()
+			--gui.hide_keyboard()
 		end
 
 		if input.selected then
