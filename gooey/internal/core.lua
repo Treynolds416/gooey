@@ -16,7 +16,7 @@ local function handle_action(component, action_id, action)
 		component.over = over
 
 		local touch = action_id == actions.TOUCH or action_id == actions.MULTITOUCH
-		local pressed = touch and action.pressed and component.over
+		local pressed = touch and action.pressed --and component.over
 		local released = touch and action.released
 		if pressed then
 			component.touch_id = action.id
