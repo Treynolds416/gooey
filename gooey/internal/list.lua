@@ -101,7 +101,7 @@ local function get_instance(list_id, stencil_id, refresh_fn, lists)
 end
 
 
-local function handle_input(list, action_id, action, click_fn)
+local function handle_input(list, action_id, action, click_fn, scroll_fn)
 	local over_stencil = gui.pick_node(list.stencil, action.x, action.y)
 
 	local touch = action_id == actions.TOUCH or action_id == actions.MULTITOUCH
@@ -143,16 +143,20 @@ local function handle_input(list, action_id, action, click_fn)
 			list.scrolling = false
 		end
 	-- handle touch and drag scrolling
-	elseif list.pressed and vmath.length(list.pressed_pos - action_pos) > 10 then
-		list.have_scrolled = true
-		list.consumed = true
-		list.scrolling = true
-		if list.is_horizontal then
-			list.scroll_pos.x = list.scroll_pos.x + (action_pos.x - list.action_pos.x)
-		else
-			list.scroll_pos.y = list.scroll_pos.y + (action_pos.y - list.action_pos.y)
+	elseif list.pressed then
+		if scroll_fn then
+			scroll_fn(list)
+		elseif vmath.length(list.pressed_pos - action_pos) > 10 then
+			list.have_scrolled = true
+			list.consumed = true
+			list.scrolling = true
+			if list.is_horizontal then
+				list.scroll_pos.x = list.scroll_pos.x + (action_pos.x - list.action_pos.x)
+			else
+				list.scroll_pos.y = list.scroll_pos.y + (action_pos.y - list.action_pos.y)
+			end
+			list.action_pos = action_pos
 		end
-		list.action_pos = action_pos
 	else
 		list.scrolling = false
 	end
