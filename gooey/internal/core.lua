@@ -23,8 +23,8 @@ local function handle_action(component, action_id, action)
 			long_press_start = socket.gettime()
 		elseif released then
 			component.touch_id = nil
-			component.long_pressed = socket.gettime() - long_press_start > component.long_pressed_time
 		end
+		component.long_pressed = socket.gettime() - long_press_start > component.long_pressed_time
 		
 		component.pressed_now = pressed and not component.pressed
 		component.released_now = released and component.pressed
