@@ -104,7 +104,7 @@ end
 local function handle_input(list, action_id, action, click_fn)
 	local over_stencil = gui.pick_node(list.stencil, action.x, action.y)
 
-	local touch = action_id == actions.TOUCH
+	local touch = action_id == actions.TOUCH or action_id == actions.MULTITOUCH
 	local scroll_up = action_id == actions.SCROLL_UP
 	local scroll_down = action_id == actions.SCROLL_DOWN
 	local pressed = touch and action.pressed and over_stencil
