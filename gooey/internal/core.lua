@@ -7,8 +7,6 @@ local EMPTY = hash("")
 local long_press_start = 0
 
 local function handle_action(component, action_id, action)
-	component.action_id = action_id
-	component.action = action
 	action.id = action.id or -1
 	component.long_pressed_time = component.long_pressed_time or 1.5
 	if not component.touch_id or component.touch_id == action.id then
@@ -35,7 +33,6 @@ local function handle_action(component, action_id, action)
 		component.clicked = component.released_now and component.over
 		component.long_pressed = component.long_pressed or false
 	end
-	if not component.action then print("no action @handle_action") end
 end
 
 function M.get_root_position(node)
@@ -65,6 +62,9 @@ function M.clickable(component, action_id, action)
 		component.pressed = false
 		return
 	end
+	
+	component.action_id = action_id
+	component.action = action
 
 	if not action.touch then
 		handle_action(component, action_id, action)
@@ -73,6 +73,7 @@ function M.clickable(component, action_id, action)
 			handle_action(component, action_id, touch_action)
 		end
 	end
+	if not component.action then print("no action @clickable end") end
 end
 
 --- Check if a node is enabled. This is done by not only
