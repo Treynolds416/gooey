@@ -7,9 +7,10 @@ local EMPTY = hash("")
 local long_press_start = 0
 
 local function handle_action(component, action_id, action)
-	action.id = action.id or -1
 	component.action_id = action_id
 	component.action = action
+	pprint(action)
+	action.id = action.id or -1
 	component.long_pressed_time = component.long_pressed_time or 1.5
 	if not component.touch_id or component.touch_id == action.id then
 		local over = gui.pick_node(component.node, action.x, action.y)
