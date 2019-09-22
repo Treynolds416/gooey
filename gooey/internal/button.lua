@@ -26,7 +26,8 @@ function M.button(node_id, action_id, action, fn, refresh_fn)
 	button.enabled = core.is_enabled(node)
 	button.node = node
 	button.refresh_fn = refresh_fn
-
+	
+	if not button.action.touch then print("no action.touch @button pre-clickable") end
 	core.clickable(button, action_id, action)
 	if button.clicked then
 		fn(button)
