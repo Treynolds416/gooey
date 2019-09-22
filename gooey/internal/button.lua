@@ -8,7 +8,6 @@ local buttons = {}
 local BUTTON = {}
 function BUTTON.refresh(button)
 	if button.refresh_fn then button.refresh_fn(button) end
-	if not button.action.touch then print("no action.touch @button.refresh") end
 end
 function BUTTON.set_visible(button, visible)
 	gui.set_enabled(button.node, visible)
@@ -31,7 +30,6 @@ function M.button(node_id, action_id, action, fn, refresh_fn)
 	if button.clicked then
 		fn(button)
 	end
-	if not button.action or not button.action.touch then print("no action/.touch @button post-clickable") end
 
 	button.refresh()
 	return button
