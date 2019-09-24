@@ -306,6 +306,7 @@ function M.dynamic(list_id, stencil_id, item_id, data, action_id, action, fn, re
 				size = gui.get_size(nodes[item_id]),
 				data = data[i] or ""
 			}
+			gui.set_id(nodes[item_id], "listN" .. i)
 			local pos
 			if list.is_horizontal then
 				pos = (item_pos - vmath.vector3(item_size.x * (i - 1), 0, 0))
