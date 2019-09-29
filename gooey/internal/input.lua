@@ -133,7 +133,7 @@ function M.input(node_id, keyboard_type, action_id, action, config, refresh_fn)
 			--gui.hide_keyboard()
 		end
 
-		if input.selected then
+		if input.selected or (config and config.override) then
 			-- new raw text input
 			if action_id == actions.TEXT then
 				input.consumed = true
