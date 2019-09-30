@@ -107,7 +107,7 @@ function M.input(node_id, keyboard_type, action_id, action, config, refresh_fn)
 	input.refresh_fn = refresh_fn
 	
 	local use_marked_text = (config and config.use_marked_text == nil) and true or (config and config.use_marked_text)
-	input.text = input.text or "" .. (not use_marked_text and input.marked_text or "")
+	input.text = input.text or gui.get_text(node) .. (not use_marked_text and input.marked_text or "")
 	input.marked_text = input.marked_text or ""
 	input.keyboard_type = keyboard_type
 	
