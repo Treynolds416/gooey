@@ -113,6 +113,10 @@ function M.input(node_id, keyboard_type, action_id, action, config, refresh_fn)
 	
 	if not action then
 		input.empty = #input.text == 0 and #input.marked_text == 0
+		input.selected = false
+		input.text = input.text .. (not use_marked_text and input.marked_text or "")
+		input.marked_text = ""
+		input.set_text(input.text)
 		input.refresh()
 		return input
 	end
@@ -121,7 +125,7 @@ function M.input(node_id, keyboard_type, action_id, action, config, refresh_fn)
 
 	if input.enabled then
 		input.deselected_now = false
-		if input.released_now then
+		if input.released_now or (config and config.override) then
 			input.selected = true
 			input.marked_text = ""
 			--gui.reset_keyboard()
@@ -133,7 +137,7 @@ function M.input(node_id, keyboard_type, action_id, action, config, refresh_fn)
 			--gui.hide_keyboard()
 		end
 
-		if input.selected or (config and config.override) then
+		if input.selected then
 			-- new raw text input
 			if action_id == actions.TEXT then
 				input.consumed = true
